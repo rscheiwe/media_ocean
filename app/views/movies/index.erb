@@ -1,3 +1,20 @@
+
+<h2>Find a Movie</h2>
+
+<%= form_tag(movies_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Movies" %>
+  <%= submit_tag "Search", :name => nil %>
+<% end %>
+<br>
+<% if @movies.blank? %>
+  <h4>There are no movies named <%= params[:search] %>.</h4>
+<% end %>
+<% if params[:search] %>
+  <% @movies.map do |movie| %>
+    <%= link_to movie.title, movie_path(movie)  %>
+  <% end %>
+<% end %>
+
 <h1>All Movies</h1>
 <% @movies.each do |movie| %>
   <h3>Title: <%= link_to movie.title, movie %></h3>

@@ -1,11 +1,16 @@
+
+<h2>Find a Favorite Critic</h2>
+
+<%= form_tag(users_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
+  <%= submit_tag "Search", :name => nil %>
+<% end %>
+<br>
 <% if @users.blank? %>
-  <h4>There are no users named <%= params[:search] %>.</h4>
+  <h4>There are no critics named <%= params[:search] %>.</h4>
 <% end %>
 <% if params[:search] %>
-  <% @users.map do |user| %>
-    <%= link_to user.username, user_path(user)  %>
+  <% @users.each do |user| %>
+    <%= link_to user.username, user_path(user)  %>     |      make a favorite critic <%= link_to "add", current_user.active_relationships.create(followed_id: user.id) %>
   <% end %>
-<% end %>
-<% @users.each do |user| %>
-  <%= user.username %><br>
 <% end %>
