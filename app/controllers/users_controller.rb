@@ -2,6 +2,16 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :delete]
   before_action :new_user, only: [:new]
 
+  def index
+    @users = User.all
+    if params[:search]
+      @users = User.search(params[:search]).order("created_at DESC")
+      @users_search = @users.map {|user| user_path(user)}
+    else
+      @users = User.all.order("created_at DESC")
+    end
+  end
+
   def new
   end
 

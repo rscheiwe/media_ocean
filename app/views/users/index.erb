@@ -1,0 +1,11 @@
+<% if @users.blank? %>
+  <h4>There are no users named <%= params[:search] %>.</h4>
+<% end %>
+<% if params[:search] %>
+  <% @users.map do |user| %>
+    <%= link_to user.username, user_path(user)  %>
+  <% end %>
+<% end %>
+<% @users.each do |user| %>
+  <%= user.username %><br>
+<% end %>

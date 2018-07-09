@@ -8,5 +8,12 @@ class User < ApplicationRecord
                                 foreign_key: "follower_id",
                                 dependent:   :destroy
 
+  def self.search(search)
+    if search
+      where('username LIKE ?', "%#{search}%")
+    else
+      all
+    end
+  end
 
 end
