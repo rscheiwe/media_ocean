@@ -1,4 +1,7 @@
 <h1>All Movies</h1>
 <% @movies.each do |movie| %>
-<h3><%= link_to movie.title, movie %></h3>
+<h3>Title: <%= link_to movie.title, movie %></h3>
+<p>Description: <%= movie.overview %></p>
+<img src="<%=movie.poster_path%>">
+<hr>
 <% end %>
