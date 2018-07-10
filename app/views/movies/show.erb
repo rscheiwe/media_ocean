@@ -1,0 +1,20 @@
+<h2><%= @movie.title %></h2>
+
+<h4><%= @movie.title %><br></h4>
+<img src="https://image.tmdb.org/t/p/w500/<%=@movie.poster_path%>", width="50%"><br><br>
+<%= @movie.overview %><br>
+<h4>Released: <%= @movie.release_date %></h4>
+
+<%= link_to "add to my watchlist", user_movies_path(user_id: current_user.id, movie_id: @movie.id), method: :post, class: "button"%>&nbsp;&nbsp;&nbsp;
+<%= link_to "Mark as seen", user_movies_path(user_id: current_user.id, movie_id: @movie.id), method: :post, class: "button" %>
+
+<h4>Reviews</h4>
+<% if @movie.reviews.length == 0 %>
+This title doesn't have any reviews yet. Mark it as seen to write one.
+<% else %>
+  <% @movie.reviews.each do |review| %>
+  <%= review.user_id %><br>
+  <%= review.created_at %><br>
+  <%= review.content %><br>
+  <% end %>
+<% end %>

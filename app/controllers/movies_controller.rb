@@ -5,6 +5,7 @@ class MoviesController < ApplicationController
   end
 
   def new
+
   end
 
   def index

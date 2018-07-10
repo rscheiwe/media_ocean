@@ -12,14 +12,17 @@
 <% end %>
 <% if params[:search] %>
   <% @movies.map do |movie| %>
+
     <% if Movie.find_by(apinum: movie[:apinum]) %>
       <h4><%= link_to movie[:title], movie_path(Movie.find_by(apinum: movie[:apinum]))  %></h4>
-      <img src="https://image.tmdb.org/t/p/w500/<%= movie[:poster_path] %>" width="30%"></a><br>
+      <%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"50%"), movie_path(Movie.find_by(apinum: movie[:apinum]))%><br>
       <hr>
+
     <% else %>
       <h4><%= link_to movie[:title], new_movie_path(movie)  %></h4>
-      <img src="https://image.tmdb.org/t/p/w500/<%= movie[:poster_path]%>" width="30%"></a><br>
+      <%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"50%"), new_movie_path(movie)%><br>
     <hr>
+    
     <% end %>
   <% end %>
 <% end %>
