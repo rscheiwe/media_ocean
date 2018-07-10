@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
     @followings = @user.passive_relationships.map { |rel| rel.follower }
   end
 
