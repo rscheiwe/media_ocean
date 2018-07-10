@@ -17,10 +17,11 @@ require 'faker'
 
 # 10.times do
 #   Movie.create(
-# title: Faker::Seinfeld.quote,
+#     title: Faker::Seinfeld.quote,
 #     release_date: Faker::Date.backward(2000),
 #     genres: "10, 11, 12",
 #     poster_path: "http://fillmurray.com/g/300/300",
-#     overview: Faker::Movie.quote
+#     overview: Faker::Movie.quote,
+#     apinum:
 #   )
 # end
