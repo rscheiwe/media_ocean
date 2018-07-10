@@ -5,20 +5,35 @@
   <%= link_to follower.username, user_path(follower) %><br>
 <% end %>
 
-<h3><%= @user.username %> is a favorite critic of:</h3>
+<h3><% if  @user == current_user %> 
+<%= "I am a favorite critic of:" %><br>
+	<% else %>
+<%= "#{@user.username} is a favorite critic of:" %> <br>
+<% end %></h3>
 <p> <% @followings.each do |followed| %>
   <%= link_to followed.username, user_path(followed) %><br>
 <% end %>
 
-<h3>Movies <%= @user.username %> has seen</h3>
+<h3><% if  @user == current_user %> 
+<%= "Movies I have seen" %><br>
+	<% else %>
+<%= "Movies #{@user.username} has seen " %> <br>
+<% end %></h3>
 <% seen_movies = @user.user_movies.select { |movie| movie.seen? } %>
 <% seen_movies.each do |sm| %>
 <%= link_to sm.movie.title, movie_path(sm) %><br/>
 <% end %>
 
-<h3><%= @user.username %>'s Watch List</h3>
-<% seen_movies = @user.user_movies.select { |movie| !movie.seen? } %>
-<% seen_movies.each do |sm| %>
-<%= link_to sm.movie.title, movie_path(sm) %><br/>
+<h3><% if  @user == current_user %> 
+<%= "My watch list"  %><br>
+	<% else %>
+<%= "#{@user.username}'s Watch List" %> <br>
+ <% end %></h3>
+<% unseen_movies = @user.user_movies.select { |movie| !movie.seen? } %>
+<% unseen_movies.each do |um| %>
+<%= link_to um.movie.title, movie_path(um)%> 
+<%= form_tag user_movie_path(um), method: 'put' do %>
+  <%= hidden_field_tag :seen, true %>
+  <%= submit_tag "I've Seen This Movie" %>
+<% end  %>
 <% end %>
-
