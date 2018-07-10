@@ -5,6 +5,7 @@
   <%= link_to follower.username, user_path(follower) %><br>
 <% end %>
 
+<h3><%= @user.username %> is a favorite critic of:</h3>
 <p> <% @followings.each do |followed| %>
-  <%= followed %><br>
+  <%= link_to followed.username, user_path(followed) %><br>
 <% end %>
