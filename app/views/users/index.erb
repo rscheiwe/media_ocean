@@ -10,7 +10,9 @@
   <h4>There are no critics named <%= params[:search] %>.</h4>
 <% end %>
 <% if params[:search] %>
-  <% @users.each do |user| %>
-    <%= link_to user.username, user_path(user)  %>     |      make a favorite critic <%= link_to "add", current_user.active_relationships.create(followed_id: user.id) %>
+  <% @users.each do |person| %>
+    <%= link_to person.username, user_path(person)  %>     |      make a favorite critic <%= link_to "add", relationships_path(followed_id: person.id), method: :post %>
   <% end %>
 <% end %>
+
+<%= link_to "Your Profile", user_path(current_user) %>
