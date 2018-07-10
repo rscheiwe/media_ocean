@@ -21,5 +21,13 @@ class User < ApplicationRecord
     end
   end
 
+  def seen_user_movies
+    self.user_movies.select do |m|
+      m.seen == true
+    end
+  end
+
+  #iterate over seen_user_movies AND 
+
 
 end
