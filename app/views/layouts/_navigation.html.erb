@@ -30,6 +30,11 @@ a:hover, a:active {
    background-color: red;
 }*/
 
+#log_button {
+  float: right;
+  word-spacing: 8px;
+}
+
 ul {
    list-style-type: none;
    margin: 0;
@@ -78,9 +83,14 @@ li a:hover {
           <li><a href="/">HOME</a></li>
           <li><%=link_to "MOVIES", movies_path%></li>
           <li><%=link_to "USERS", users_path %></li>
-          <li><% if logged_in?%><%=link_to "PROFILE", user_path(current_user) %><%else%><%=link_to "PROFILE", about_path%><%end%></li>
+          <li><% if logged_in?%>
+            <%=link_to "PROFILE", user_path(current_user) %><%else%><%=link_to "PROFILE", about_path%><%end%></li>
           <li><%=link_to "ABOUT", about_path %></li>
-          <li><a href="#">Login</a></li>
+          <span id="log_button"><li>  <% if logged_in? %>
+            <%= link_to "LOG OUT", logout_path, method: :delete %>
+            <% else %>
+            <%= link_to "LOG IN", login_path %></p>
+            <% end %></li></span>
 
         </ul>
       </div>

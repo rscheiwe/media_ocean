@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :delete]
+  before_action :set_user, only: [:edit, :update, :delete]
   before_action :new_user, only: [:new]
 
   def index
@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
       render :new
@@ -25,8 +26,14 @@ class UsersController < ApplicationController
   end
 
   def show
+<<<<<<< HEAD
     @followings =  Relationship.select {|follower| follower.followed_id == current_user.id}
     
+=======
+    @user = User.find(params[:id])
+    # @followings =  Relationship.select {|follower| follower.followed_id == current_user.id}
+    @followings = @user.passive_relationships.map { |rel| rel.follower }
+>>>>>>> 038b2548741649195a936373e08b63015153cb4b
   end
 
   private
