@@ -4,3 +4,7 @@
 <% @user.following.each do |follower| %>
   <%= link_to follower.username, user_path(follower) %><br>
 <% end %>
+
+<p> <% @followings.each do |followed| %>
+  <%= followed %><br>
+<% end %>
