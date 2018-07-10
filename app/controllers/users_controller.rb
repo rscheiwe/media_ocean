@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def show
     @followings =  Relationship.select {|follower| follower.followed_id == current_user.id}
-    byebug
+    
   end
 
   private
