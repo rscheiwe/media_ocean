@@ -15,3 +15,7 @@
 <% end %> -->
 
 <!-- button_to "add to my watchlist", controller: 'user_movies', action: 'create', method: :post, params: { movie_id: movie.id, seen: false } -->
+
+
+<%= button_to "add to my watchlist", controller: 'user_movies', action: 'create', method: :post, params: { movie_id: movie.id, seen: false }  %>
+<%= button_to "Mark as seen", controller: 'user_movies', action: 'create', method: :post, params: { movie_id: movie.id, seen: true }  %>

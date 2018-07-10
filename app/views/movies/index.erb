@@ -12,22 +12,14 @@
 <% end %>
 <% if params[:search] %>
   <% @movies.map do |movie| %>
-    <%= link_to movie.title, movie_path(movie)  %>
-      <% if movie.id? %>
-         <% if current_user.user_movies
-        <% end %>
-
+    <% if Movie.find_by(apinum: movie[:apinum]) %>
+      <h4><%= link_to movie[:title], movie_path(Movie.find_by(apinum: movie[:apinum]))  %></h4>
+      <img src="https://image.tmdb.org/t/p/w500/<%= movie[:poster_path] %>" width="30%"></a><br>
+      <hr>
+    <% else %>
+      <h4><%= link_to movie[:title], new_movie_path(movie)  %></h4>
+      <img src="https://image.tmdb.org/t/p/w500/<%= movie[:poster_path]%>" width="30%"></a><br>
+    <hr>
+    <% end %>
   <% end %>
-<% end %>
-
-
-
-<h1>All Movies</h1>
-<% @movies.each do |movie| %>
-  <h3>Title: <%= link_to movie.title, movie %></h3>
-    <p>Description: <%= movie.overview %></p>
-    <img src="<%=movie.poster_path%>">
-    <%= button_to "add to my watchlist", controller: 'user_movies', action: 'create', method: :post, params: { movie_id: movie.id, seen: false }  %>
-    <%= button_to "Mark as seen", controller: 'user_movies', action: 'create', method: :post, params: { movie_id: movie.id, seen: true }  %>
-  <hr>
 <% end %>
