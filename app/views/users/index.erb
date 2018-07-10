@@ -14,5 +14,3 @@
     <%= link_to person.username, user_path(person)  %>     |      make a favorite critic <%= link_to "add", relationships_path(followed_id: person.id), method: :post %>
   <% end %>
 <% end %>
-
-<%= link_to "Your Profile", user_path(current_user) %>

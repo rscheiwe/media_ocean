@@ -1,28 +1,88 @@
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+    $(function(){
+        $('a').each(function(){
+            if ($(this).prop('href') == window.location.href) {
+                $(this).addClass('active'); $(this).parents('li').addClass('active');
+            }
+        });
+    });
+</script>
+
 <html>
 <head>
 <style>
 
+div.space {
+  word-spacing: 50px;
+}
+/* visited link
+a:link, a:visited {
+   background-color: #f44336;
+   color: white;
+   padding: 14px 25px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+}
 
+a:hover, a:active {
+   background-color: red;
+}*/
+
+ul {
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   overflow: hidden;
+   background-color: #227;
+}
+
+li {
+   float: left;
+}
+
+li a {
+   display: block;
+   color: white;
+   text-align: center;
+   padding: 14px 20px;
+   text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+   background-color: #190;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+[data-role=navbar] {
+     border-radius: 30px;
+}
 
 </style>
 </head>
 </html>
 
 <header class="navbar  navbar-inverse">
-    <div class="navbar-class">
+    <div class="navbar">
       <div class="container">
 
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-
-
-        <p class="nav navbar-nav">
-          <center><p class="active"><a href="/">HOME</a>
-          <%=link_to "MOVIES", movies_path%>
-          <%=link_to "USERS", users_path %></center>
+      <div class="space">
+        <ul class="nav navbar-nav" data-role="navbar">
+          <li><a href="/">HOME</a></li>
+          <li><%=link_to "MOVIES", movies_path%></li>
+          <li><%=link_to "USERS", users_path %></li>
+          <li><%=link_to "PROFILE", user_path(current_user) %></li>
+          <li><a href="#">Login</a></li>
 
         </ul>
-
+      </div>
       </div>
     </div>
   </header>
