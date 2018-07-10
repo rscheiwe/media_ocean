@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
+<style>
+
+
+
+</style>
   <head>
-    <%= image_tag("mediaoceanlogo.png", alt: "logo") %>
+    <%= link_to image_tag("mediaoceanlogo.png", alt: "logo", width:"50%"), home_path %>
 
     <title>MediaOcean</title>
     <%= csrf_meta_tags %>
@@ -9,19 +14,24 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,100' rel='stylesheet' type='text/css'>
+
+    <%= stylesheet_link_tag "application.css" %>
   </head>
 
   <body>
     <header>
       <% if logged_in? %>
-      <p>Hello, <%= link_to current_user.username, user_path(current_user) %>
+      <p align="right">Hello, <%= link_to current_user.username, user_path(current_user) %>
         <%= button_to "Log Out", logout_path, method: :delete %>
         <% else %>
-        <%= link_to "Log In", login_path %> <%= link_to "Sign Up", new_user_path %>
+        <%= link_to "Log In", login_path %> <%= link_to "Sign Up", new_user_path %></p>
         <% end %>
 
         <%= render 'layouts/navigation' %>
     </header>
+
+
     <%= yield %>
   </body>
 </html>

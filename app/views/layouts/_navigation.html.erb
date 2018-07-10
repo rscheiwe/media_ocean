@@ -78,7 +78,8 @@ li a:hover {
           <li><a href="/">HOME</a></li>
           <li><%=link_to "MOVIES", movies_path%></li>
           <li><%=link_to "USERS", users_path %></li>
-          <li><%=link_to "PROFILE", user_path(current_user) %></li>
+          <li><% if logged_in?%><%=link_to "PROFILE", user_path(current_user) %><%else%><%=link_to "PROFILE", about_path%><%end%></li>
+          <li><%=link_to "ABOUT", about_path %></li>
           <li><a href="#">Login</a></li>
 
         </ul>

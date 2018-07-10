@@ -1,1 +1,7 @@
-<h1>Hello, <%= current_user.username %></h1>
+<% if logged_in? %>
+  <h1>Hello, <%= current_user.username %></h1>
+<% else %>
+  <h1>Hello. Please Log In or Sign Up</h1>
+<% end %>
+
+<h4>Here's recent activity from your feed:</h4>
