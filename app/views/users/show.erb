@@ -9,3 +9,16 @@
 <p> <% @followings.each do |followed| %>
   <%= link_to followed.username, user_path(followed) %><br>
 <% end %>
+
+<h3>Movies <%= @user.username %> has seen</h3>
+<% seen_movies = @user.user_movies.select { |movie| movie.seen? } %>
+<% seen_movies.each do |sm| %>
+<%= link_to sm.movie.title, movie_path(sm) %><br/>
+<% end %>
+
+<h3><%= @user.username %>'s Watch List</h3>
+<% seen_movies = @user.user_movies.select { |movie| !movie.seen? } %>
+<% seen_movies.each do |sm| %>
+<%= link_to sm.movie.title, movie_path(sm) %><br/>
+<% end %>
+

@@ -13,6 +13,8 @@
 <% if params[:search] %>
   <% @movies.map do |movie| %>
     <%= link_to movie.title, movie_path(movie)  %>
+    <%= button_to "add to my watchlist", controller: 'user_movies', action: 'create', method: :post, params: { movie_id: movie.id, seen: false }  %> 
+    <%= button_to "I've seen this movie", controller: 'user_movies', action: 'create', method: :post, params: { movie_id: movie.id, seen: true }  %>  
   <% end %>
 <% end %>
 
@@ -21,5 +23,8 @@
   <h3>Title: <%= link_to movie.title, movie %></h3>
     <p>Description: <%= movie.overview %></p>
     <img src="<%=movie.poster_path%>">
+    <%= button_to "add to my watchlist", controller: 'user_movies', action: 'create', method: :post, params: { movie_id: movie.id, seen: false }  %> 
+    <%= button_to "I've seen this movie", controller: 'user_movies', action: 'create', method: :post, params: { movie_id: movie.id, seen: true }  %> 
   <hr>
 <% end %>
+

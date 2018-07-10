@@ -11,6 +11,6 @@
 <% end %>
 <% if params[:search] %>
   <% @users.each do |person| %>
-    <%= link_to person.username, user_path(person)  %>     |      make a favorite critic <%= link_to "add", relationships_path(followed_id: person.id), method: :post %>
+    <%= link_to person.username, user_path(person)  %>     |      make a favorite critic <%= link_to "add", relationships_path(followed_id: person.id), method: :post %><br>
   <% end %>
 <% end %>
