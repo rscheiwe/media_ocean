@@ -1,9 +1,6 @@
 <h1><%= @user.username %></h1>
 
-
-
-
 <h3><%= @user.username %>'s Favorite Critics | <%= link_to "Add a Favorite Critic", users_path %></h3>
 <% @user.following.each do |follower| %>
-  <%= link_to follower.username, user_path(follower) %>
+  <%= link_to follower.username, user_path(follower) %><br>
 <% end %>
