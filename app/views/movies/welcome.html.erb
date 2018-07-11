@@ -5,3 +5,11 @@
 <% end %>
 
 <h4>Here's recent activity from your feed:</h4>
+
+<% current_user.following.each do |critic| %>
+	<% critic.reviews.each do |review| %>
+		<b><%= link_to critic.username, user_path(critic) %></b> "<%= review.rating %> out of 5"<br>
+		<%= link_to review.movie.title, movie_path(review.movie) %><br>
+		<%= review.content %>
+	<% end %>
+<% end %>
