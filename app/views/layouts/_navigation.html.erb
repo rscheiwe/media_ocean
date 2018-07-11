@@ -72,28 +72,30 @@ li a:hover {
 </head>
 </html>
 
-<header class="navbar  navbar-inverse">
-    <div class="navbar">
-      <div class="container">
-
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="space">
-        <ul class="nav navbar-nav" data-role="navbar">
-          <li><a href="/">HOME</a></li>
-          <li><%=link_to "MOVIES", movies_path%></li>
-          <li><%=link_to "USERS", users_path %></li>
-          <li><% if logged_in?%>
-            <%=link_to "PROFILE", user_path(current_user) %><%else%><%=link_to "PROFILE", about_path%><%end%></li>
-          <li><%=link_to "ABOUT", about_path %></li>
-          <span id="log_button"><li>  <% if logged_in? %>
-            <%= link_to "LOG OUT", logout_path, method: :delete %>
-            <% else %>
-            <%= link_to "LOG IN", login_path %></p>
-            <% end %></li></span>
-
-        </ul>
-      </div>
-      </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<a class="navbar-brand" href="/">
+      <img src="/assets/mediaoceanlogo.png" height="80" alt="">
+    </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      
+      <a class="nav-item nav-link" href="/">HOME</a>
+      <%=link_to "MOVIES", movies_path, {class: "nav-item nav-link"} %>
+      <%=link_to "USERS", users_path, {class: "nav-item nav-link"} %>
+      <% if logged_in?%>
+        <%=link_to "PROFILE", user_path(current_user), {class: "nav-item nav-link"} %>
+      <%else%>
+      <%end%>
+      <%=link_to "ABOUT", about_path, {class: "nav-item nav-link"} %>
+      <% if logged_in? %>  
+        <%= link_to "LOG OUT", logout_path,  {class: "nav-item nav-link", method: :delete} %>
+      <% else %>
+        <%= link_to "LOG IN", login_path, {class: "nav-item nav-link"} %>
+      <% end %>
     </div>
-  </header>
+  </div>
+</nav>
+

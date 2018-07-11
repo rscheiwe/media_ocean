@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   end
 
   def new
-    @movie = Movie.new(title: params[:title], release_date: params[:release_date], genres: params[:genres], poster_path: params[:poster_path], apinum: params[:apinum])
+    @movie = Movie.new(title: params[:title], release_date: params[:release_date], genres: params[:genres], poster_path: params[:poster_path], apinum: params[:apinum], overview: params[:overview])
   end
 
   def index
