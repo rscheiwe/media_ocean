@@ -21,7 +21,7 @@
 <% end %></h3>
 <% seen_movies = @user.user_movies.select { |movie| movie.seen? } %>
 <% seen_movies.each do |sm| %>
-<%= link_to sm.movie.title, movie_path(sm.movie) %><br/>
+<%= link_to sm.movie.title, movie_path(sm.movie) %> | <%= link_to "review this movie", {controller: "reviews", action: "new", movie_id: sm.movie_id} %><br/>
 <% end %>
 
 <h3><% if  @user == current_user %>

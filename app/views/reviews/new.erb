@@ -1,0 +1,21 @@
+<%= form_for @review do |f| %>
+
+<% if @review.errors.any? %>
+	<div id="error_explanation">
+	<h3>There were some errors, review not submitted.</h3>
+	<ul><% @review.errors.full_messages.each do |message|%>
+		<%= message %>
+	<% end %>
+	</ul>
+	</div>
+<% end %>
+
+<%= f.label @movie.title %><br>
+<%= f.label :content, "Your review:" %><br>
+<%= f.text_area :content %><br>
+<%= f.label :rating %>
+<%= f.select :rating, options_for_select(0..5), { prompt: "0-5 stars"} %>
+<%= f.hidden_field :movie_id, value: @movie.id %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<%= f.submit %>
+<% end %>
