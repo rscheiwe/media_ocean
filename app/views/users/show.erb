@@ -1,8 +1,22 @@
 <h1><%= @user.username %></h1>
 
-<h3><%= @user.username %>'s Favorite Critics | <%= link_to "Add a Favorite Critic", users_path %></h3>
-<% @user.following.each do |follower| %>
-  <%= link_to follower.username, user_path(follower) %><br>
+<% if  @user == current_user %>
+	<h3><%= @user.username %>'s Favorite Critics | <%= link_to "Find more Favorite Critics", users_path %></h3>
+	<% @user.following.each do |follower| %>
+	  <%= link_to follower.username, user_path(follower) %><br>
+	<% end %>
+<% else %>
+	<% if current_user.following.include?(@user) %>
+		<h3><%= @user.username %>'s Favorite Critics | <%= @user.username %> is one of your Favorite Critics</h3>
+		<% @user.following.each do |follower| %>
+		  <%= link_to follower.username, user_path(follower) %><br>
+		<% end %>	
+	<% else %> 
+		<h3><%= @user.username %>'s Favorite Critics | <%= link_to "Add #{@user.username} as a Favorite Critic", relationships_path(followed_id: @user.id), method: :post %></h3>
+		<% @user.following.each do |follower| %>
+		  <%= link_to follower.username, user_path(follower) %><br>
+		<% end %>
+	<% end %>
 <% end %>
 
 <h3><% if  @user == current_user %>
