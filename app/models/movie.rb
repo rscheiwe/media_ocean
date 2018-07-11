@@ -1,6 +1,10 @@
 class Movie < ApplicationRecord
 
-  has_many :reviews
+validates :apinum, uniqueness: true
+validates :title, presence: true
+
+has_many :reviews
+has_many :user_movies
 
   def self.movie_search(search)
   	if search
