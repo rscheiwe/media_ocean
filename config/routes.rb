@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :reviews
   resources :users
   resources :movies
-  resources :user_movies, only: [:create, :new, :edit, :update, :destroy]
+  resources :user_movies
 
 
   root to: 'movies#welcome', as: 'home'

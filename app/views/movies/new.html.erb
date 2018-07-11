@@ -6,8 +6,7 @@
 <%= params[:overview] %><br>
 <h4>Released: <%= params[:release_date] %></h4>
 
-<%= link_to "add to my watchlist", {controller: 'user_movies', action: 'create', method: :post}, {class: "button"}%>&nbsp;&nbsp;&nbsp;
-<%= link_to "Mark as seen", {controller: 'user_movies', action: 'create', method: :post}, {class: "button"} %>
-
+<%= button_to "add to my watchlist", {controller: 'user_movies', action: 'create'}, {class: "button", method: :post}%>&nbsp;&nbsp;&nbsp;
+<%= button_to "Mark as seen", {controller: 'user_movies', action: 'create'}, {class: "button", method: :post} %>
 <h4>Reviews</h4>
 This title doesn't have any reviews yet. Mark it as seen to write one.

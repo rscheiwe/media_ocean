@@ -5,7 +5,10 @@ class MoviesController < ApplicationController
   end
 
   def new
+  end
 
+  def create
+    byebug
   end
 
   def index
