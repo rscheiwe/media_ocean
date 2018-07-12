@@ -62,9 +62,12 @@ class User < ApplicationRecord
   end
 
   def link_is_image
-    imgarr = self.profile_pic.split(".")
-    unless imgarr.last == "jpg" || imgarr.last == "png" || imgarr.last == "gif" || imgarr.last == "jpeg"
-      errors.add(:profile_pic, "must upload a valid URL with an image ending.")
+    if self.profile_pic.empty?
+    else
+      imgarr = self.profile_pic.split(".")
+      unless imgarr.last == "jpg" || imgarr.last == "png" || imgarr.last == "gif" || imgarr.last == "jpeg"
+        errors.add(:profile_pic, "must upload a valid URL with an image ending.")
+      end
     end
   end
   private

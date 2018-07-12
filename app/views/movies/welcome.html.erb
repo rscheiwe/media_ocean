@@ -7,7 +7,7 @@
   <h1>Hello, <%= current_user.username %></h1>
 	<h4>Here's recent activity from your feed:</h4>
 
-	<% current_user.following.each do |critic| %>
+	<% current_user.following.reverse.each do |critic| %>
 		<% critic.reviews.each do |review| %>
     <div class="card">
       <div class="card-body">
@@ -16,9 +16,10 @@
         <% else %>
           <img src="/assets/unknown user.png" height="40px" >
         <% end %>
-      <b><%= link_to critic.username, user_path(critic) %></b> "<%= review.rating %> out of 5"<br>
+      <b><%= link_to critic.username, user_path(critic) %></b> "<%= review.rating %> out of 5" | <%= review.created_at %><br> 
       <%= link_to review.movie.title, movie_path(review.movie) %><br>
 			<%= review.content %>
+
       </div>
       </div>
 		<% end %>
