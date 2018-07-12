@@ -4,55 +4,64 @@
 	<div class="col-sm-6">
     <div class="row">
     <div class="col-sm-6">
-      <img src="https://avatars3.githubusercontent.com/u/36425627?s=460&v=4" width="90%">
-      <h3><%= link_to "Chris Metzger", "https://github.com/critsmet" %></h3>
+      <img src="https://avatars3.githubusercontent.com/u/36425627?s=460&v=4" width="90%"><br><br>
   	</div>
-<!-- # <% if  @user == current_user %>
-# 	<h3><%= @user.username %>'s Favorite Critics | <%= link_to "Find more Favorite Critics", users_path %></h3>
-# 	<% @user.following.each do |follower| %>
-# 	  <%= link_to follower.username, user_path(follower) %><br>
-# 	<% end %>
-# <% else %>
-# 	<% if current_user.following.include?(@user) %>
-# 		<h3><%= @user.username %>'s Favorite Critics | <%= @user.username %> is one of your Favorite Critics</h3>
-# 		<% @user.following.each do |follower| %>
-# 		  <%= link_to follower.username, user_path(follower) %><br>
-# 		<% end %>
-# 	<% else %>
-# 		<h3><%= @user.username %>'s Favorite Critics | <%= link_to "Add #{@user.username} as a Favorite Critic", relationships_path(followed_id: @user.id), method: :post %></h3>
-# 		<% @user.following.each do |follower| %>
-# 		  <%= link_to follower.username, user_path(follower) %><br>
-# 		<% end %>
-# 	<% end %>
-# <% end %>
-#
-# <h3><% if  @user == current_user %>
-# <%= "I am a favorite critic of:" %><br>
-# 	<% else %>
-# <%= "#{@user.username} is a favorite critic of:" %> <br>
-# <% end %></h3>
-# <p> <% @followings.each do |followed| %>
-#   <%= link_to followed.username, user_path(followed) %><br>
-# <% end %>
-# </div> -->
 <div class="col-sm-6">
-    <h3>Name: <%= @user.username %></h3>
+    <h3>Name: <%= link_to @user.username, user_path(@user) %></h3>
     <h3>Bio: La di da di da </h3>
 	</div>
 </div>
 <div class="row">
 <div class="col-md">
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: white; text: black;">
   <li class="nav-item">
-    <a class="nav-link active" id="fav-critics-tab" data-toggle="tab" href="#fav-critics" role="tab" aria-controls="fav-critics" aria-selected="true">Home</a>
+    <a class="nav-link active" id="fav-critics-tab" data-toggle="tab" href="#fav-critics" role="tab" aria-controls="fav-critics" aria-selected="true" style="color: black;">Favorite Critics</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="followers" aria-selected="false">Profile</a>
+    <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="followers" aria-selected="false" style="color: black;">Followers</a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="fav-critics" role="tabpanel" aria-labelledby="fav-critics-tab">...</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+
+  <div class="tab-pane fade show active" id="fav-critics" role="tabpanel" aria-labelledby="fav-critics-tab">
+
+    <% if  @user == current_user %>
+     	<p><%= @user.username %>'s Favorite Critics | <%= link_to "Find more Favorite Critics", users_path %><br>
+     	<% @user.following.each do |follower| %>
+     	  <%= link_to follower.username, user_path(follower) %><br>
+     	<% end %>
+     <% else %>
+     	<% if current_user.following.include?(@user) %>
+     		<p><%= @user.username %>'s Favorite Critics | <%= @user.username %> is one of your Favorite Critics
+     		<% @user.following.each do |follower| %>
+     		  <%= link_to follower.username, user_path(follower) %><br>
+     		<% end %>
+     	<% else %>
+     		<p><%= @user.username %>'s Favorite Critics | <%= link_to "Add #{@user.username} as a Favorite Critic", relationships_path(followed_id: @user.id), method: :post %>
+     		<% @user.following.each do |follower| %>
+     		  <%= link_to follower.username, user_path(follower) %><br>
+     		<% end %>
+     	<% end %>
+     <% end %>
+
+  </div>
+
+
+  <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
+
+
+     <p><% if  @user == current_user %>
+     <%= "I am a favorite critic of:" %><br>
+     	<% else %>
+     <%= "#{@user.username} is a favorite critic of:" %> <br>
+     <% end %>
+     <p> <% @followings.each do |followed| %>
+       <%= link_to followed.username, user_path(followed) %><br>
+     <% end %>
+
+  </div>
+
+
 </div>
 </div>
 
@@ -60,42 +69,85 @@
 </div>
 </div>
 <div class="col-md">
-<h3><% if  @user == current_user %>
-<%= "Movies I have seen" %><br>
-	<% else %>
-<%= "Movies #{@user.username} has seen " %> <br>
-<% end %></h3>
-<% seen_movies = @user.user_movies.select { |movie| movie.seen? } %>
-<% seen_movies.each do |sm| %>
-	<% if current_user.has_seen?(sm.movie) %> <%= link_to sm.movie.title, movie_path(sm.movie) %> |
-		<%= link_to "review this movie", {controller: "reviews", action: "new", movie_id: sm.movie_id} %><br>
-		<% else %>
-<%= link_to sm.movie.title, movie_path(sm.movie) %><br>
-		<% end %>
-<% end %>
 
-<h3><% if  @user == current_user %>
-<%= "My watch list"  %><br>
-	<% else %>
-<%= "#{@user.username}'s Watch List" %> <br>
- <% end %></h3>
-<% unseen_movies = @user.user_movies.select { |movie| !movie.seen? } %>
-<% unseen_movies.each do |um| %>
-<%= link_to um.movie.title, movie_path(um.movie)%>
-<%= form_tag user_movie_path(um), method: 'put' do %>
-  <%= hidden_field_tag :seen, true %>
-  <%= submit_tag "I've Seen This Movie" %>
-<% end  %>
-<% end %>
 
-<h3>My favorite critics' recent reviews:</h3>
-<% @user.following.each do |critic| %>
-	<% critic.reviews.each do |review| %>
-		<b><%= link_to critic.username, user_path(critic) %></b> "<%= review.rating %> out of 5"<br>
-		<%= link_to review.movie.title, movie_path(review.movie) %><br>
-		<%= review.content %>
-	<% end %>
-<% end %>
+  <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: white; text: black;">
+  <li class="nav-item">
+    <a class="nav-link active" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="true" style="color: black;">
+
+      <% if  @user == current_user %>
+      <%= "My Reviews"  %>
+        <% else %>
+      <%= "#{@user.username}'s Reviews" %>
+       <% end %>
+
+     </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="watchlist-tab" data-toggle="tab" href="#watchlist" role="tab" aria-controls="watchlist" aria-selected="false" style="color: black;">
+
+      <% if  @user == current_user %>
+      <%= "My Watch List"  %><br>
+      	<% else %>
+      <%= "#{@user.username}'s Watch List" %> <br>
+       <% end %>
+
+     </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="watched-movies-tab" data-toggle="tab" href="#watched-movies" role="tab" aria-controls="watched-movies" aria-selected="false" style="color: black;">
+
+      <% if  @user == current_user %>
+      <%= "Movies I've Watched"  %><br>
+        <% else %>
+      <%= "Movies #{@user.username} has watched" %> <br>
+       <% end %>
+
+     </a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+
+  <div class="tab-pane fade show active" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+    <br>
+     <% @user.reviewed_movies.each do |review| %>
+     <%= link_to review.movie.title, movie_path(review.movie)%> | <%= "#{review.rating} out of 5" %><br>
+     <%= review.content %>
+     <hr>
+     <% end %>
+  </div>
+
+
+  <div class="tab-pane fade" id="watchlist" role="tabpanel" aria-labelledby="watchlist-tab">
+    <br>
+  <% unseen_movies = @user.user_movies.select { |movie| !movie.seen? } %>
+  <% unseen_movies.each do |um| %>
+  <%= link_to um.movie.title, movie_path(um.movie)%>
+  <%= form_tag user_movie_path(um), method: 'put' do %>
+    <%= hidden_field_tag :seen, true %>
+    <%= submit_tag "I've Seen This Movie" %>
+  <% end  %>
+  <% end %>
+
+  </div>
+
+  <div class="tab-pane fade" id="watched-movies" role="tabpanel" aria-labelledby="watched-movies-tab">
+    <br>
+     <% seen_movies = @user.user_movies.select { |movie| movie.seen? } %>
+     <% seen_movies.each do |sm| %>
+     	<% if current_user.has_seen?(sm.movie) %> <%= link_to sm.movie.title, movie_path(sm.movie) %> |
+     		<%= link_to "review this movie", {controller: "reviews", action: "new", movie_id: sm.movie_id} %><br>
+     		<% else %>
+     <%= link_to sm.movie.title, movie_path(sm.movie) %><br>
+     		<% end %>
+     <% end %>
+
+
+  </div>
+
+
+</div>
+
 
 </div>
 </div>
