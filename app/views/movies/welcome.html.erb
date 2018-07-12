@@ -7,9 +7,6 @@
   <h1>Hello, <%= current_user.username %></h1>
 	<h4>Here's recent activity from your feed:</h4>
 
-
-
-<h4>Your Current Feed: </h4>
 	<% current_user.following.each do |critic| %>
 		<% critic.reviews.each do |review| %>
 			<b><%= link_to critic.username, user_path(critic) %></b> "<%= review.rating %> out of 5"<br>
@@ -21,7 +18,25 @@
 </div>
 <div class="col-md">
   <br>
-  <h4>Top Box Office Movies This Week:</h4>
+  <center><h4>Top Box Office Movies This Week:</center></h4>
+
+   <% if logged_in? %>
+
+     <% @movies.map do |movie| %>
+
+       <% if Movie.find_by(apinum: movie[:apinum]) %>
+         <center><h4><%= link_to movie[:title], movie_path(Movie.find_by(apinum: movie[:apinum]))  %></h4></center>
+         <center><%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"40%"), movie_path(Movie.find_by(apinum: movie[:apinum]))%></center><br>
+         <hr>
+
+       <% else %>
+         <center><h4><%= link_to movie[:title], new_movie_path(movie)  %></center></h4>
+         <center><%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"40%"), new_movie_path(movie)%></center><br>
+       <hr>
+
+       <% end %>
+     <% end %>
+   <% end %>
 </div>
 </div>
 </div>
