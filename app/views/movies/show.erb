@@ -6,8 +6,16 @@
 	</div>
 	<div class="col-md">
 		<h2><%= @movie.title %></h2><br>
-		<%= link_to "add to my watchlist", {controller: 'user_movies', action: 'create', seen: false, user_id: current_user.id, movie_id: @movie.id, apinum: @movie.apinum}, {method: :post}%>&nbsp;&nbsp;&nbsp;
-		<%= link_to "Mark as seen", {controller: 'user_movies', action: 'create', seen: true, user_id: current_user.id, movie_id: @movie.id, apinum: @movie.apinum}, {method: :post}%><br><br>
+		<% if current_user.has_reviewed?(@movie) %>
+		<% elsif current_user.has_seen?(@movie) %>
+		<%= link_to "review this movie", {controller: "reviews", action: "new", movie_id: @movie.id, user_id: current_user.id} %><br>
+			<% elsif current_user.on_watchlist?(@movie)%>
+			<% um = UserMovie.where("user_id = ? and movie_id = ?", current_user.id, @movie.id) %>
+			<%= link_to "mark as seen", {controller: 'user_movies', action: 'update', seen: true, user_id: current_user.id, movie_id: @movie.id, apinum: @movie.apinum, id: um[0].id}, {method: :patch}%><br><br>
+			<% else %>
+				<%= link_to "add to my watchlist", {controller: 'user_movies', action: 'create', seen: false, user_id: current_user.id, movie_id: @movie.id, apinum: @movie.apinum}, {method: :post}%>&nbsp;&nbsp;&nbsp;
+				<%= link_to "mark as seen", {controller: 'user_movies', action: 'create', seen: true, user_id: current_user.id, movie_id: @movie.id, apinum: @movie.apinum}, {method: :post}%><br><br>
+			<% end %>
 		<%= @movie.overview %>
 		<br>
 		<br>

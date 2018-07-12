@@ -10,8 +10,8 @@
 		<h3><%= @user.username %>'s Favorite Critics | <%= @user.username %> is one of your Favorite Critics</h3>
 		<% @user.following.each do |follower| %>
 		  <%= link_to follower.username, user_path(follower) %><br>
-		<% end %>	
-	<% else %> 
+		<% end %>
+	<% else %>
 		<h3><%= @user.username %>'s Favorite Critics | <%= link_to "Add #{@user.username} as a Favorite Critic", relationships_path(followed_id: @user.id), method: :post %></h3>
 		<% @user.following.each do |follower| %>
 		  <%= link_to follower.username, user_path(follower) %><br>
@@ -35,7 +35,11 @@
 <% end %></h3>
 <% seen_movies = @user.user_movies.select { |movie| movie.seen? } %>
 <% seen_movies.each do |sm| %>
-<%= link_to sm.movie.title, movie_path(sm.movie) %> | <%= link_to "review this movie", {controller: "reviews", action: "new", movie_id: sm.movie_id} %><br/>
+	<% if current_user.has_seen?(sm.movie) %> <%= link_to sm.movie.title, movie_path(sm.movie) %> |
+		<%= link_to "review this movie", {controller: "reviews", action: "new", movie_id: sm.movie_id} %><br>
+		<% else %>
+<%= link_to sm.movie.title, movie_path(sm.movie) %><br>
+		<% end %>
 <% end %>
 
 <h3><% if  @user == current_user %>
