@@ -6,8 +6,8 @@
 	</div>
 	<div class="col-md">
 		<h2><%= @movie.title %></h2><br>
-		<%= link_to "add to my watchlist", user_movies_path(user_id: current_user.id, movie_id: @movie.id), method: :post, class: "button"%>&nbsp;&nbsp;&nbsp;
-		<%= link_to "Mark as seen", user_movies_path(user_id: current_user.id, movie_id: @movie.id), method: :post, class: "button" %><br><br>
+		<%= link_to "add to my watchlist", {controller: 'user_movies', action: 'create', seen: false, user_id: current_user.id, movie_id: @movie.id, apinum: @movie.apinum}, {method: :post}%>&nbsp;&nbsp;&nbsp;
+		<%= link_to "Mark as seen", {controller: 'user_movies', action: 'create', seen: true, user_id: current_user.id, movie_id: @movie.id, apinum: @movie.apinum}, {method: :post}%><br><br>
 		<%= @movie.overview %>
 		<br>
 		<br>
