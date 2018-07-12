@@ -1,28 +1,91 @@
 
-<h2>Find a Movie</h2>
+<!-- # <% if @movies.blank? %>
+#   <h4>There are no movies named <%= params[:search] %>.</h4>
+# <% end %>
+# <% if params[:search] %>
+#
+#   <% @movies.map do |movie| %>
+#
+#     <% if Movie.find_by(apinum: movie[:apinum]) %>
+#       <h4><%= link_to movie[:title], movie_path(Movie.find_by(apinum: movie[:apinum]))  %></h4>
+#       <%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"50%"), movie_path(Movie.find_by(apinum: movie[:apinum]))%><br>
+#       <hr>
+#
+#     <% else %>
+#       <h4><%= link_to movie[:title], new_movie_path(movie)  %></h4>
+#       <%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"50%"), new_movie_path(movie)%><br>
+#     <hr>
+#
+#     <% end %>
+#   <% end %>
+# <% end %> -->
 
-<%= form_tag(movies_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Movies" %>
-  <%= submit_tag "Search", :name => nil %>
-<% end %>
-<br>
+<html lang="en">
 
-<% if @movies.blank? %>
-  <h4>There are no movies named <%= params[:search] %>.</h4>
-<% end %>
-<% if params[:search] %>
-  <% @movies.map do |movie| %>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <% if Movie.find_by(apinum: movie[:apinum]) %>
-      <h4><%= link_to movie[:title], movie_path(Movie.find_by(apinum: movie[:apinum]))  %></h4>
-      <%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"50%"), movie_path(Movie.find_by(apinum: movie[:apinum]))%><br>
-      <hr>
+  <!-- Bootstrap CSS-->
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 
-    <% else %>
-      <h4><%= link_to movie[:title], new_movie_path(movie)  %></h4>
-      <%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"50%"), new_movie_path(movie)%><br>
-    <hr>
-    
-    <% end %>
+  <!-- Custom CSS-->
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+
+
+  <section class="jumbotron text-lg-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Movie Search</h1>
+      <%= form_tag(movies_path, :method => "get", id: "search-form") do %>
+      <div class="md-form">
+        <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search Movies" %>
+        <%= submit_tag "Search", :name => nil %>
+      </div>
+      <% end %>
+    </div>
+  </section>
+      <!-- <br> -->
+      <!-- <div> -->
+        <!-- <a href="#" class="btn btn-info">Main call to action</a> -->
+        <!-- <a href="#" class="btn btn-secondary">Secondary action</a> -->
+      <!-- </div> -->
+
+  <% if @movies.blank? %>
+    <h4>There are no movies named <%= params[:search] %>.</h4>
   <% end %>
-<% end %>
+
+<% if params[:search] %>
+  <div class="album text-muted">
+    <div class="container">
+
+      <div class="row">
+        <% @movies.map do |movie| %>
+        <% if Movie.find_by(apinum: movie[:apinum]) %>
+
+          <div class="card">
+
+            <%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"50%"), movie_path(Movie.find_by(apinum: movie[:apinum]))%><br>
+            <%= link_to movie[:title], movie_path(Movie.find_by(apinum: movie[:apinum]))%>
+            <hr>
+          </div>
+
+        <% else %>
+          <div class="card">
+            <center><%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"70%"), new_movie_path(movie)%></center><br>
+            <center><%= link_to movie[:title], new_movie_path(movie)%></center>
+            <hr>
+          </div>
+
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
+</body>
+</html>
