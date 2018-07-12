@@ -5,15 +5,25 @@
     <div class="row">
     <div class="col-sm-6">
       <% if @user.profile_pic != nil %>
-  		<%= image_tag(@user.profile_pic, style:"max-height: 150px") %>
+  		<%= image_tag(@user.profile_pic, style:"max-height: 250px") %>
   	<% else %>
-  		<img src="/assets/unknown user.png" height="150px" >
+  		<img src="/assets/unknown user LG.png" height="250px" >
   	<% end %>
   	</div>
+
+
 <div class="col-sm-6">
     <h3>Name: <%= link_to @user.username, user_path(@user) %></h3>
     <h3>Bio: La di da di da </h3>
-	</div>
+
+  <% if current_user.following.include?(@user) %>
+    <p><%= @user.username %> is one of your Favorite Critics
+      <% else %>
+      <% if current_user != @user %>
+    <p><%= link_to "Add #{@user.username} as a Favorite Critic", relationships_path(followed_id: @user.id), method: :post %>
+      <% end %>
+      <% end %>
+  </div>
 </div>
 <div class="row">
 <div class="col-md">
@@ -30,18 +40,17 @@
   <div class="tab-pane fade show active" id="fav-critics" role="tabpanel" aria-labelledby="fav-critics-tab">
 
     <% if  @user == current_user %>
-     	<p><%= @user.username %>'s Favorite Critics | <%= link_to "Find more Favorite Critics", users_path %><br>
+     	<p><%= link_to "Find more Favorite Critics", users_path %><br>
      	<% @user.following.each do |follower| %>
      	  <%= link_to follower.username, user_path(follower) %><br>
      	<% end %>
      <% else %>
      	<% if current_user.following.include?(@user) %>
-     		<p><%= @user.username %>'s Favorite Critics | <%= @user.username %> is one of your Favorite Critics
+
      		<% @user.following.each do |follower| %>
      		  <%= link_to follower.username, user_path(follower) %><br>
      		<% end %>
      	<% else %>
-     		<p><%= @user.username %>'s Favorite Critics | <%= link_to "Add #{@user.username} as a Favorite Critic", relationships_path(followed_id: @user.id), method: :post %>
      		<% @user.following.each do |follower| %>
      		  <%= link_to follower.username, user_path(follower) %><br>
      		<% end %>

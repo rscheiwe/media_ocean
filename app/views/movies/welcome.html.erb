@@ -11,6 +11,11 @@
 		<% critic.reviews.each do |review| %>
     <div class="card">
       <div class="card-body">
+        <% if critic.profile_pic != nil %>
+          <%= image_tag(critic.profile_pic, style:"max-height: 40px") %>
+        <% else %>
+          <img src="/assets/unknown user.png" height="40px" >
+        <% end %>
       <b><%= link_to critic.username, user_path(critic) %></b> "<%= review.rating %> out of 5"<br>
       <%= link_to review.movie.title, movie_path(review.movie) %><br>
 			<%= review.content %>
