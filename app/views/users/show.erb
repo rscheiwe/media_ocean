@@ -5,7 +5,7 @@
     <div class="row">
     <div class="col-sm-6">
       <% if @user.profile_pic != nil %>
-  		<%= image_tag(@user.profile_pic, style:"max-height: 250px") %>
+  		<%= image_tag(@user.profile_pic, style:"max-height: 250px; max-width: 250px;" ) %>
   	<% else %>
   		<img src="/assets/unknown user LG.png" height="250px" >
   	<% end %>

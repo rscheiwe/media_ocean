@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   validates :email, uniqueness: true
+  validate :link_is_image
   has_many :reviews, dependent: :destroy
   has_many :user_movies
   has_many :movies, through: :user_movies
@@ -59,5 +60,13 @@ class User < ApplicationRecord
       m.seen == false
     end
   end
+
+  def link_is_image
+    imgarr = self.profile_pic.split(".")
+    unless imgarr.last == "jpg" || imgarr.last == "png" || imgarr.last == "gif" || imgarr.last == "jpeg"
+      errors.add(:profile_pic, "must upload a valid URL with an image ending.")
+    end
+  end
+  private
 
 end
