@@ -25,14 +25,14 @@
 
 
 .jumbotron {
-  padding-top: 15rem;
+  padding-top: 12rem;
   padding-bottom: 6rem;
   margin-bottom: 0;
   background-color: #fff;
-  background: url(https://images.wallpaperscraft.com/image/heath_ledger_smiling_white_background_joker_74525_2560x1024.jpg);
+  background: url("searchBG.png");
   background-repeat: no-repeat;
-  background-position: bottom center;
-  background-size: cover;
+  background-position: top center;
+  background-size: contain;
 }
 
 .jumbotron-heading {
