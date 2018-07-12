@@ -1,33 +1,65 @@
-<h1><%= @user.username %></h1>
 
-<% if  @user == current_user %>
-	<h3><%= @user.username %>'s Favorite Critics | <%= link_to "Find more Favorite Critics", users_path %></h3>
-	<% @user.following.each do |follower| %>
-	  <%= link_to follower.username, user_path(follower) %><br>
-	<% end %>
-<% else %>
-	<% if current_user.following.include?(@user) %>
-		<h3><%= @user.username %>'s Favorite Critics | <%= @user.username %> is one of your Favorite Critics</h3>
-		<% @user.following.each do |follower| %>
-		  <%= link_to follower.username, user_path(follower) %><br>
-		<% end %>
-	<% else %>
-		<h3><%= @user.username %>'s Favorite Critics | <%= link_to "Add #{@user.username} as a Favorite Critic", relationships_path(followed_id: @user.id), method: :post %></h3>
-		<% @user.following.each do |follower| %>
-		  <%= link_to follower.username, user_path(follower) %><br>
-		<% end %>
-	<% end %>
-<% end %>
+<div class="container">
+  <div class="row">
+	<div class="col-sm-6">
+    <div class="row">
+    <div class="col-sm-6">
+      <img src="https://avatars3.githubusercontent.com/u/36425627?s=460&v=4" width="90%">
+      <h3><%= link_to "Chris Metzger", "https://github.com/critsmet" %></h3>
+  	</div>
+<!-- # <% if  @user == current_user %>
+# 	<h3><%= @user.username %>'s Favorite Critics | <%= link_to "Find more Favorite Critics", users_path %></h3>
+# 	<% @user.following.each do |follower| %>
+# 	  <%= link_to follower.username, user_path(follower) %><br>
+# 	<% end %>
+# <% else %>
+# 	<% if current_user.following.include?(@user) %>
+# 		<h3><%= @user.username %>'s Favorite Critics | <%= @user.username %> is one of your Favorite Critics</h3>
+# 		<% @user.following.each do |follower| %>
+# 		  <%= link_to follower.username, user_path(follower) %><br>
+# 		<% end %>
+# 	<% else %>
+# 		<h3><%= @user.username %>'s Favorite Critics | <%= link_to "Add #{@user.username} as a Favorite Critic", relationships_path(followed_id: @user.id), method: :post %></h3>
+# 		<% @user.following.each do |follower| %>
+# 		  <%= link_to follower.username, user_path(follower) %><br>
+# 		<% end %>
+# 	<% end %>
+# <% end %>
+#
+# <h3><% if  @user == current_user %>
+# <%= "I am a favorite critic of:" %><br>
+# 	<% else %>
+# <%= "#{@user.username} is a favorite critic of:" %> <br>
+# <% end %></h3>
+# <p> <% @followings.each do |followed| %>
+#   <%= link_to followed.username, user_path(followed) %><br>
+# <% end %>
+# </div> -->
+<div class="col-sm-6">
+    <h3>Name: <%= @user.username %></h3>
+    <h3>Bio: La di da di da </h3>
+	</div>
+</div>
+<div class="row">
+<div class="col-md">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="fav-critics-tab" data-toggle="tab" href="#fav-critics" role="tab" aria-controls="fav-critics" aria-selected="true">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="followers" aria-selected="false">Profile</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="fav-critics" role="tabpanel" aria-labelledby="fav-critics-tab">...</div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+</div>
+</div>
 
-<h3><% if  @user == current_user %>
-<%= "I am a favorite critic of:" %><br>
-	<% else %>
-<%= "#{@user.username} is a favorite critic of:" %> <br>
-<% end %></h3>
-<p> <% @followings.each do |followed| %>
-  <%= link_to followed.username, user_path(followed) %><br>
-<% end %>
 
+</div>
+</div>
+<div class="col-md">
 <h3><% if  @user == current_user %>
 <%= "Movies I have seen" %><br>
 	<% else %>
@@ -64,3 +96,7 @@
 		<%= review.content %>
 	<% end %>
 <% end %>
+
+</div>
+</div>
+</div>
