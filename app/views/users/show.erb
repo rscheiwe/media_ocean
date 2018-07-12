@@ -40,7 +40,7 @@
   <div class="tab-pane fade show active" id="fav-critics" role="tabpanel" aria-labelledby="fav-critics-tab">
 
     <% if  @user == current_user %>
-     	<p><%= link_to "Find more Favorite Critics", users_path %><br>
+     	<p><%= link_to "Find more Favorite Critics", users_path, {:style=>'color:red;'} %><br>
      	<% @user.following.each do |follower| %>
      	  <%= link_to follower.username, user_path(follower) %><br>
      	<% end %>
