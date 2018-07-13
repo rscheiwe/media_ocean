@@ -23,8 +23,18 @@
   margin-right: 3rem;
 }
 
-
 .jumbotron {
+  padding-top: 10rem;
+  padding-bottom: 6rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  background: url("UsersearchBG.png");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: contain;
+}
+
+.jumbotron1 {
   padding-top: 12rem;
   padding-bottom: 6rem;
   margin-bottom: 0;

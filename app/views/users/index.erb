@@ -1,21 +1,63 @@
 
-<h2>Find a Favorite Critic</h2>
+<html lang="en">
 
-<%= form_tag(users_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
-  <%= submit_tag "Search", :name => nil %>
-<% end %>
-<br>
-<% if @users.blank? %>
-  <h4>There are no critics named <%= params[:search] %>.</h4>
-<% end %>
-<% if params[:search] %>
-  <% @users.each do |person| %>
-    <% if person.profile_pic != nil %>
-		<%= image_tag(person.profile_pic, style:"max-height: 50px") %>
-	<% else %>
-		<img src="/assets/unknown user LG.png" height="50px" >
-	<% end %>
-	<%= link_to person.username, user_path(person)  %>     |      make a favorite critic <%= link_to "add", relationships_path(followed_id: person.id), method: :post %><br>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Bootstrap CSS-->
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+  <!-- Custom CSS-->
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+
+
+  <section class="jumbotron text-lg-center">
+    <div class="container" style="width:40%">
+      <h1 class="jumbotron-heading">Critic Search</h1>
+      <%= form_tag(users_path, :method => "get", id: "search-form") do %>
+      <div class="md-form">
+        <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search Critics" %>
+        <%= submit_tag "Search", :name => nil %>
+      </div>
+      <% end %>
+    </div>
+  </section>
+
+
+  <% if @users.blank? %>
+    <h4>There are no critics named <%= params[:search] %>.</h4>
   <% end %>
-<% end %>
+
+<% if params[:search] %>
+  <div class="album text-muted">
+    <div class="container">
+
+      <div class="row">
+        <% @users.each do |person| %>
+
+          <div class="card">
+
+            <% if person.profile_pic != nil %>
+            <%= image_tag(person.profile_pic, style:"max-height: 50px") %>
+          <% else %>
+            <img src="/assets/unknown user LG.png" height="50px" >
+          <% end %>
+          <%= link_to person.username, user_path(person)  %>     |      make a favorite critic <%= link_to "add", relationships_path(followed_id: person.id), method: :post %><br>
+          <hr>
+          </div>
+
+
+
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
+</body>
+</html>
