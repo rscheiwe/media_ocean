@@ -33,8 +33,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = nil
-
-    if params[:search]
+    if params[:search] && params[:search] != ""
 
         response = RestClient.get "https://api.themoviedb.org/3/search/movie?api_key=8593f125d9ede49fe34d715af7003c5f&language=en-US&query="+"#{params[:search]}"+"&page=1&include_adult=false"
         json = JSON.parse(response.body)

@@ -1,5 +1,16 @@
 <h1>Sign Up</h1>
 <%= form_for @user do |f| %>
+
+  <% if @user.errors.any? %>
+  	<div id="error_explanation" style="background-color: white">
+  	<h4><font color="red">There were some errors:</h4></font>
+  	<ul style="background-color: white"><% @user.errors.full_messages.each do |message|%>
+  		<font color="red"><i><%= message %></i></font>
+  	<% end %>
+  	</ul>
+  	</div>
+  <% end %>
+
 <%= f.label :username %>
 <%= f.text_field :username %><br/>
 <%= f.label :email %>
