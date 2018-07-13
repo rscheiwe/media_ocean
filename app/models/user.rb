@@ -62,7 +62,7 @@ class User < ApplicationRecord
   end
 
   def link_is_image
-    if self.profile_pic.nil?
+    if self.profile_pic.empty?
     else
       imgarr = self.profile_pic.split(".")
       unless imgarr.last == "jpg" || imgarr.last == "png" || imgarr.last == "gif" || imgarr.last == "jpeg"
