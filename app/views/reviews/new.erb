@@ -1,3 +1,16 @@
+
+<div class="container">
+<div class="row">
+	<div class="col-md">
+
+		<img src="https://image.tmdb.org/t/p/w500/<%=@movie.poster_path%>", width="90%"><br><br>
+	</div>
+
+
+
+
+
+<div class="col-md">
 <%= form_for @review do |f| %>
 
 <% if @review.errors.any? %>
@@ -10,12 +23,18 @@
 	</div>
 <% end %>
 
-<%= f.label @movie.title %><br>
+
+<h3><%= @movie.title %></h3><br>
 <%= f.label :content, "Your review:" %><br>
-<%= f.text_area :content %><br>
+<%= f.text_area :content, :rows=>5, :cols=>40 %><br>
 <%= f.label :rating %>
 <%= f.select :rating, options_for_select(0..5), { prompt: "0-5 stars"} %>
 <%= f.hidden_field :movie_id, value: @movie.id %>
 <%= f.hidden_field :user_id, value: current_user.id %>
 <%= f.submit %>
 <% end %>
+
+
+	</div>
+</div>
+</div>

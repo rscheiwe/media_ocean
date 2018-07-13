@@ -40,7 +40,9 @@
   <div class="tab-pane fade show active" id="fav-critics" role="tabpanel" aria-labelledby="fav-critics-tab">
 
     <% if  @user == current_user %>
-     	<p><%= link_to "Find more Favorite Critics", users_path, {:style=>'color:red;'} %><br>
+     	<div class="btn btn-outline-danger">
+        <%= link_to "Find more Favorite Critics", users_path, {:style=>'color:red;'} %>
+      </div><br>
      	<% @user.following.each do |follower| %>
      	  <%= link_to follower.username, user_path(follower) %><br>
      	<% end %>
@@ -124,7 +126,12 @@
   <div class="tab-pane fade show active" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
     <br>
      <% @user.reviewed_movies.each do |review| %>
-     <%= link_to review.movie.title, movie_path(review.movie)%> | <%= "#{review.rating} out of 5" %><br>
+     <%= link_to review.movie.title, movie_path(review.movie)%>
+
+      <div><% review.rating.to_i.times do %>
+
+      <img src="/assets/starfish.png" height="16px" >
+      <% end %></div><br>
      <%= review.content %>
      <hr>
      <% end %>
