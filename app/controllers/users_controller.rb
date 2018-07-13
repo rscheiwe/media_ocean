@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    if params[:search]
+    if params[:search] && params[:search] != ""
       @users = User.search(params[:search]).order("created_at DESC")
       @users_search = @users.map {|user| user_path(user)}
     else
