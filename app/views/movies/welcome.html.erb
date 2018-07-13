@@ -1,12 +1,18 @@
 
 <% if logged_in? %>
+
 <div class="container">
   <div class="row">
+    <div class="col-md">
+      <h1>Hello, <%= current_user.username %></h1>
+      <h4>Here's recent activity from your feed:</h4>
+    </div>
+    <div class="col-md">
+    <br><h2>Top Box Office Movies</h2>
+    </div>
+    <div class="row">
   	<div class="col-md" style="overflow:scroll;height:35rem;">
       <br>
-  <h1>Hello, <%= current_user.username %></h1>
-	<h4>Here's recent activity from your feed:</h4>
-
 	<% current_user.following.reverse.each do |critic| %>
 		<% critic.reviews.each do |review| %>
     <div class="card">
@@ -34,8 +40,6 @@
 </div>
 <div class="col-md" style="overflow:scroll;height:35rem;">
   <br>
-  <center><h4>Top Box Office Movies This Week:</center></h4>
-
    <% if logged_in? %>
 
      <% @movies.map do |movie| %>
