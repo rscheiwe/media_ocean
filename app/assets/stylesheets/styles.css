@@ -39,7 +39,7 @@
   padding-bottom: 6rem;
   margin-bottom: 0;
   background-color: #fff;
-  background: url("searchBG.png");
+  background: image-url("searchBG.png");
   background-repeat: no-repeat;
   background-position: top center;
   background-size: contain;
