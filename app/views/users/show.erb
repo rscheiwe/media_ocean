@@ -15,6 +15,11 @@
 <div class="col-sm-6">
     <h3>Name: <%= link_to @user.username, user_path(@user) %></h3>
     <h3>Bio: </h3><p><%= @user.bio %> </p>
+    <% if current_user == @user %>
+    <div class="btn btn-outline-danger">
+     <%= link_to "Edit Account", edit_user_path, {:style=>'color:red;'} %>
+   </div><br>
+   <% end %>
 
   <% if current_user.following.include?(@user) %>
     <p><%= @user.username %> is one of your Favorite Critics
@@ -145,7 +150,7 @@
   <%= link_to um.movie.title, movie_path(um.movie)%>
   <%= form_tag user_movie_path(um), method: 'put' do %>
     <%= hidden_field_tag :seen, true %>
-    <%= submit_tag "I've Seen This Movie" %>
+    <div class="btn btn-outline-danger"><%= submit_tag "I've Seen This Movie", class: "btn" %></div>
   <% end  %>
   <% end %>
 
@@ -155,9 +160,12 @@
     <br>
      <% seen_movies = @user.user_movies.select { |movie| movie.seen? } %>
      <% seen_movies.each do |sm| %>
-     	<% if current_user.has_seen?(sm.movie) %> <%= link_to sm.movie.title, movie_path(sm.movie) %> |
-     		<%= link_to "review this movie", {controller: "reviews", action: "new", movie_id: sm.movie_id} %><br>
-     		<% else %>
+     	<% if current_user.has_seen?(sm.movie)%> <%= link_to sm.movie.title, movie_path(sm.movie) %>
+        <% if !current_user.has_reviewed?(sm.movie) %>
+        | <%= link_to "review this movie", {controller: "reviews", action: "new", movie_id: sm.movie_id} %>
+        <% end %>
+        <br>
+        <% else %>
      <%= link_to sm.movie.title, movie_path(sm.movie) %><br>
      		<% end %>
      <% end %>

@@ -1,0 +1,28 @@
+<h1>Edit My Info</h1>
+<%= form_for @user do |f| %>
+
+  <% if @user.errors.any? %>
+  	<div id="error_explanation" style="background-color: white">
+  	<h4><font color="red">There were some errors:</h4></font>
+  	<ul style="background-color: white"><% @user.errors.full_messages.each do |message|%>
+  		<font color="red"><i><%= message %></i></font>
+  	<% end %>
+  	</ul>
+  	</div>
+  <% end %>
+
+<%= f.label :username %>
+<%= f.text_field :username %><br/>
+<%= f.label :email %>
+<%= f.email_field :email %><br/>
+<%= f.label :bio %>
+<%= f.text_area :bio %><br/>
+<%= f.label :profile_pic %>
+<%= f.text_field :profile_pic, placeholder: "enter a picture URL here" %><br/>
+Confirm your password:<br>
+<%= f.label :password %>
+<%= f.password_field :password %><br/>
+<%= f.label :password_confirmation %>
+<%= f.password_field :password_confirmation %><br/>
+<%= f.submit %>
+<% end %>

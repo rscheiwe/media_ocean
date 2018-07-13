@@ -70,8 +70,9 @@
 
           <div class="card">
 
-            <%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"50%"), movie_path(Movie.find_by(apinum: movie[:apinum]))%><br>
-            <%= link_to movie[:title], movie_path(Movie.find_by(apinum: movie[:apinum]))%>
+            <center><%= link_to (image_tag ("https://image.tmdb.org/t/p/w500/#{movie[:poster_path]}"), width:"70%"), movie_path(Movie.find_by(apinum: movie[:apinum]))%></center><br>
+            <center><%= link_to movie[:title], movie_path(Movie.find_by(apinum: movie[:apinum]))%>
+            </center>
             <hr>
           </div>
 
