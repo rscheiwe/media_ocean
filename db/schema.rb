@@ -16,50 +16,50 @@ ActiveRecord::Schema.define(version: 2018_07_12_204900) do
   enable_extension "plpgsql"
 
   create_table "movies", force: :cascade do |t|
-    t.string "title"
+    t.text "title"
     t.datetime "release_date"
-    t.string "genres"
-    t.string "poster_path"
+    t.text "genres"
+    t.text "poster_path"
     t.text "overview"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "apinum"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.bigint "apinum"
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["followed_id"], name: "index_relationships_on_followed_id"
-    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+    t.bigint "follower_id"
+    t.bigint "followed_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["followed_id"], name: "idx_24679_index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "idx_24679_index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "idx_24679_index_relationships_on_follower_id"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "movie_id"
+    t.bigint "user_id"
+    t.bigint "movie_id"
     t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.bigint "rating"
   end
 
   create_table "user_movies", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "movie_id"
+    t.bigint "user_id"
+    t.bigint "movie_id"
     t.boolean "seen", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "password_digest"
-    t.string "profile_pic"
+  create_table "users", id: :bigint, default: nil, force: :cascade do |t|
+    t.text "username"
+    t.text "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text "password_digest"
+    t.text "profile_pic"
     t.text "bio"
   end
 
